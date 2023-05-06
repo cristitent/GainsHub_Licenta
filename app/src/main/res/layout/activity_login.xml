@@ -75,7 +75,7 @@
                 android:drawableTint="@color/colorPrimary"
                 android:ems="10"
                 android:hint="@string/password"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
