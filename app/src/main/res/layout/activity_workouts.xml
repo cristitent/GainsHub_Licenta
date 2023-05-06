@@ -19,23 +19,22 @@
             android:id="@+id/textHello"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="135dp"
             android:layout_marginTop="15dp"
-            android:text="@string/hello"
+            android:text="Gym"
             android:textColor="@color/colorWhite"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="4dp"
             android:layout_marginTop="15dp"
-            android:text="@string/john"
+            android:text="aholic"
             android:textColor="@color/colorWhite"
             android:textSize="25sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/textHello"
             app:layout_constraintTop_toTopOf="parent" />
 
