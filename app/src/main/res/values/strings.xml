@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Gymaholic App</string>
+    <string name="hello">Hello</string>
+    <string name="search_elements">Search elements</string>
+    <string name="exercises">Exercises</string>
+    <string name="workouts">Workouts</string>
+    <string name="progression">Progression</string>
+    <string name="history">History</string>
+    <string name="john">John</string>
+    <string name="search_workouts">Search Workouts</string>
+    <string name="search_exercises">Search Exercises</string>
+    <string name="add_workout">add workout</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email_or_username">Email or Username</string>
+    <string name="password">Password</string>
+    <string name="hello_there">Hello There!</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="your_name">Your Name</string>
+    <string name="register">Register</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up_now">Sign Up!</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login_here">Login Here!</string>
+</resources>

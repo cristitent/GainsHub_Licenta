@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432056758293",
+    "project_id": "database-licenta-tent",
+    "storage_bucket": "database-licenta-tent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432056758293:android:93a883b556d9e484385e1c",
+        "android_client_info": {
+          "package_name": "com.example.gymaholicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432056758293-2vgr7m021jbad5uhd0fhl8j4lanphmct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhTMSSAGOib767kQriw29LvYZkU60sWrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432056758293-2vgr7m021jbad5uhd0fhl8j4lanphmct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
