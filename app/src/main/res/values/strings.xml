@@ -22,4 +22,6 @@
     <string name="sign_up_now">Sign Up!</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login_here">Login Here!</string>
+    <string name="search_history_for">Search History for...</string>
+    <string name="search_progression_for">Search Progression for...</string>
 </resources>

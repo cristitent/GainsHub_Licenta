@@ -14,10 +14,11 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private Button buttonExercises;
     private Button buttonWorkouts;
+    private Button buttonProgression;
+    private Button buttonHistory;
     FirebaseAuth auth;
     private Button buttonLogout;
     FirebaseUser user;
-    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,22 @@ public class MainActivity extends AppCompatActivity {
                 openWorkoutsActivity();
             }
         });
+
+        buttonProgression = (Button) findViewById(R.id.button8);
+        buttonProgression.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openProgressionActivity();
+            }
+        });
+
+        buttonHistory = (Button) findViewById(R.id.button9);
+        buttonHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHistoryActivity();
+            }
+        });
     }
     public void openExercisesActivity() {
         Intent intent = new Intent(this, ExercisesActivity.class);
@@ -66,6 +83,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void openWorkoutsActivity() {
         Intent intent = new Intent(this, WorkoutsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openProgressionActivity() {
+        Intent intent = new Intent(this, ProgressionActivity.class);
+        startActivity(intent);
+    }
+
+    public void openHistoryActivity() {
+        Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
 }
