@@ -2,10 +2,10 @@ package com.example.gymaholicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -21,6 +21,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.app.Dialog;
 
 public class ExercisesActivity extends AppCompatActivity {
 
@@ -44,7 +46,7 @@ public class ExercisesActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            URL url = new URL("https://api.api-ninjas.com/v1/exercises?muscle=" + et_exercises.getText().toString());
+                            URL url = new URL("https://api.api-ninjas.com/v1/exercises?name=" + et_exercises.getText().toString());
                             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                             connection.setRequestProperty("accept", "application/json");
                             connection.setRequestProperty("X-API-Key", "xf0aeGx7IEmtEwf4eZ0hng==tSpzadwz07ocJL3C");
@@ -72,10 +74,8 @@ public class ExercisesActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        // Clear previous views
                                         ll_exercises.removeAllViews();
 
-                                        // Create and add views for each exercise item
                                         for (Exercise exercise : exerciseList) {
                                             View itemView = getLayoutInflater().inflate(R.layout.list_exercise, ll_exercises, false);
 
@@ -94,16 +94,13 @@ public class ExercisesActivity extends AppCompatActivity {
                                             itemView.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Intent intent = new Intent(getApplicationContext(), WorkoutsActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    openExerciseDialog(exercise);
                                                 }
                                             });
                                         }
                                     }
                                 });
                             } else {
-                                // Handle error response
                                 final String errorResponse = "HTTP Error: " + responseCode;
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -126,5 +123,35 @@ public class ExercisesActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void openExerciseDialog(Exercise exercise) {
+        Dialog dialog = new Dialog(ExercisesActivity.this);
+        dialog.setContentView(R.layout.exercise_dialog);
+
+        TextView nameTextView = dialog.findViewById(R.id.textExerciseName);
+        TextView typeTextView = dialog.findViewById(R.id.textExerciseType);
+        TextView muscleTextView = dialog.findViewById(R.id.textExerciseMuscle);
+        TextView equipmentTextView = dialog.findViewById(R.id.textExerciseEquipment);
+        TextView difficultyTextView = dialog.findViewById(R.id.textExerciseDifficulty);
+        TextView instructionsTextView = dialog.findViewById(R.id.textExerciseInstructions);
+
+        nameTextView.setText(exercise.getName());
+        typeTextView.setText("Type: " + exercise.getType() + "\n");
+        muscleTextView.setText("Muscle: " + exercise.getMuscle() + "\n");
+        equipmentTextView.setText("Equipment: " + exercise.getEquipment() + "\n");
+        difficultyTextView.setText("Difficulty: " + exercise.getDifficulty() + "\n");
+        instructionsTextView.setText("Instructions: " + exercise.getInstructions() + "\n");
+
+
+        Button closeButton = dialog.findViewById(R.id.btnCancel);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }
