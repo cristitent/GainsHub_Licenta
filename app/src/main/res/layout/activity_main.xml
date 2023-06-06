@@ -42,12 +42,13 @@
             android:id="@+id/imageMenu"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_menu"
             app:layout_constraintBottom_toBottomOf="@id/textHello"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textHello"
+            app:layout_constraintVertical_bias="0.0"
             app:tint="@color/colorWhite" />
 
         <LinearLayout
@@ -62,29 +63,6 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageMenu">
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="@string/search_elements"
-                android:imeOptions="actionSearch"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/white_rectangle_background"
-                android:contentDescription="@string/app_name"
-                android:padding="6dp"
-                android:src="@drawable/ic_search"
-                app:tint="@color/colorBlack" />
 
         </LinearLayout>
 

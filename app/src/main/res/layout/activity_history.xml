@@ -42,12 +42,13 @@
             android:id="@+id/imageMenu"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_menu"
             app:layout_constraintBottom_toBottomOf="@id/textHello"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textHello"
+            app:layout_constraintVertical_bias="0.0"
             app:tint="@color/colorWhite" />
 
         <LinearLayout
