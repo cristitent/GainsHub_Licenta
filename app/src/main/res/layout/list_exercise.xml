@@ -4,9 +4,8 @@
     android:layout_height="wrap_content"
     app:circularflow_angles="10">
 
-
     <LinearLayout
-        android:id="@+id/layoutWorkouts"
+        android:id="@+id/layoutExercises"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
