@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialog_workout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/dialog_first_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:layout_below="@id/dialog_workout_name"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/dialog_sets_label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_first_exercise"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8dp"
+        android:text="Sets: "
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/dialog_sets_value1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_sets_label1"
+        android:layout_alignBaseline="@id/dialog_sets_label1"
+        android:hint="0"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_reps_label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reps: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_first_exercise"
+        android:layout_toRightOf="@id/dialog_sets_value1"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_reps_value1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_reps_label1"
+        android:layout_alignBaseline="@id/dialog_reps_label1"
+        android:hint="00"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_weights_label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weights: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_first_exercise"
+        android:layout_toRightOf="@id/dialog_reps_value1"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/dialog_weights_value1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/dialog_weights_label1"
+        android:layout_marginBottom="16dp"
+        android:layout_toEndOf="@id/dialog_weights_label1"
+        android:layout_toRightOf="@id/dialog_sets_value1"
+        android:background="@drawable/edit_text_background"
+        android:hint="00"
+        android:inputType="numberDecimal"
+        android:padding="7dp" />
+
+    <TextView
+        android:id="@+id/dialog_second_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:layout_below="@id/dialog_weights_label1"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/dialog_sets_label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sets: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_second_exercise"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_sets_value2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_sets_label2"
+        android:layout_alignBaseline="@id/dialog_sets_label2"
+        android:hint="0"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_reps_label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reps: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_second_exercise"
+        android:layout_toRightOf="@id/dialog_sets_value2"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_reps_value2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_reps_label2"
+        android:layout_alignBaseline="@id/dialog_reps_label2"
+        android:hint="00"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_weights_label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weights: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_second_exercise"
+        android:layout_toRightOf="@id/dialog_reps_value2"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/dialog_weights_value2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_weights_label2"
+        android:layout_toRightOf="@id/dialog_sets_value2"
+        android:layout_alignBaseline="@id/dialog_weights_label2"
+        android:hint="00"
+        android:inputType="numberDecimal"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/dialog_third_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:layout_below="@id/dialog_weights_label2"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/dialog_sets_label3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sets: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_third_exercise"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_sets_value3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_sets_label3"
+        android:layout_alignBaseline="@id/dialog_sets_label3"
+        android:hint="0"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_reps_label3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reps: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_third_exercise"
+        android:layout_toRightOf="@id/dialog_sets_value3"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_reps_value3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_reps_label3"
+        android:layout_alignBaseline="@id/dialog_reps_label3"
+        android:hint="00"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_weights_label3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weights: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_third_exercise"
+        android:layout_toRightOf="@id/dialog_reps_value3"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/dialog_weights_value3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_weights_label3"
+        android:layout_toRightOf="@id/dialog_sets_value3"
+        android:layout_alignBaseline="@id/dialog_weights_label3"
+        android:hint="00"
+        android:inputType="numberDecimal"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/dialog_fourth_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:layout_below="@id/dialog_weights_label3"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/dialog_sets_label4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sets: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_fourth_exercise"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_sets_value4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_sets_label4"
+        android:layout_alignBaseline="@id/dialog_sets_label4"
+        android:hint="0"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_reps_label4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reps: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_fourth_exercise"
+        android:layout_toRightOf="@id/dialog_sets_value4"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_reps_value4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_reps_label4"
+        android:layout_alignBaseline="@id/dialog_reps_label4"
+        android:hint="00"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_weights_label4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weights: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_fourth_exercise"
+        android:layout_toRightOf="@id/dialog_reps_value4"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/dialog_weights_value4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/dialog_weights_label4"
+        android:layout_marginBottom="16dp"
+        android:layout_toEndOf="@id/dialog_weights_label4"
+        android:layout_toRightOf="@id/dialog_sets_value4"
+        android:background="@drawable/edit_text_background"
+        android:hint="00"
+        android:inputType="numberDecimal"
+        android:padding="7dp" />
+
+    <TextView
+        android:id="@+id/dialog_fifth_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:layout_below="@id/dialog_weights_label4"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/dialog_sets_label5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sets: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_fifth_exercise"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_sets_value5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_sets_label5"
+        android:layout_alignBaseline="@id/dialog_sets_label5"
+        android:hint="0"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_reps_label5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reps: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_fifth_exercise"
+        android:layout_toRightOf="@id/dialog_sets_value5"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/dialog_reps_value5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_reps_label5"
+        android:layout_alignBaseline="@id/dialog_reps_label5"
+        android:hint="00"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dialog_weights_label5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weights: "
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dialog_fifth_exercise"
+        android:layout_toRightOf="@id/dialog_reps_value5"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/dialog_weights_value5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_weights_label5"
+        android:layout_toRightOf="@id/dialog_sets_value5"
+        android:layout_alignBaseline="@id/dialog_weights_label5"
+        android:hint="00"
+        android:inputType="numberDecimal"
+        android:background="@drawable/edit_text_background"
+        android:padding="7dp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_weights_label5"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Ok" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_weights_label5"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Cancel"
+        android:textColor="@color/colorRed"
+        android:textColorHighlight="@color/colorRed" />
+
+</RelativeLayout>

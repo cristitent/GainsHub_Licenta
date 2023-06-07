@@ -1,6 +1,12 @@
 package com.example.gymaholicapp;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
 public class Workout {
+    private String workoutId;
     private String workoutName;
     private String firstExercise;
     private String secondExercise;
@@ -18,6 +24,29 @@ public class Workout {
         this.thirdExercise = thirdExercise;
         this.fourthExercise = fourthExercise;
         this.fifthExercise = fifthExercise;
+    }
+
+    public void addExercise(int exerciseIndex,String exerciseName, int sets, int reps, double weights) {
+        ExerciseData exerciseData = new ExerciseData(exerciseIndex,exerciseName, sets, reps, weights);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        String exerciseId = db.collection("workouts").document().getId();
+
+        DocumentReference exerciseRef = db.collection("workouts").document(getWorkoutId())
+                .collection("exercises").document(exerciseId);
+
+        exerciseRef.set(exerciseData, SetOptions.merge());
+
+        db.collection("workouts").document(getWorkoutId()).update("exerciseCount", FieldValue.increment(1));
+    }
+
+    public String getWorkoutId() {
+        return workoutId;
+    }
+
+    public void setWorkoutId(String workoutId) {
+        this.workoutId = workoutId;
     }
 
     public String getWorkoutName() {
