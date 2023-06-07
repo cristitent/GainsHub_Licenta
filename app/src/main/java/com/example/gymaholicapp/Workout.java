@@ -5,6 +5,9 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Workout {
     private String workoutId;
     private String workoutName;
@@ -14,7 +17,11 @@ public class Workout {
     private String fourthExercise;
     private String fifthExercise;
 
+    private List<WorkoutsHistory> workoutEntries;
+
+
     public Workout() {
+        workoutEntries = new ArrayList<>();
     }
 
     public Workout(String workoutName, String firstExercise, String secondExercise, String thirdExercise, String fourthExercise, String fifthExercise) {
@@ -95,5 +102,21 @@ public class Workout {
 
     public void setFifthExercise(String fifthExercise) {
         this.fifthExercise = fifthExercise;
+    }
+
+    public void addExerciseEntry(int exerciseIndex, String exerciseName, int sets, int reps, double weights) {
+        WorkoutsHistory entry = new WorkoutsHistory();
+        entry.setWorkoutName(workoutName);
+        entry.setExerciseIndex(exerciseIndex);
+        entry.setExerciseName(exerciseName);
+        entry.setSets(sets);
+        entry.setReps(reps);
+        entry.setWeights(weights);
+
+        workoutEntries.add(entry);
+    }
+
+    public List<WorkoutsHistory> getWorkoutEntries() {
+        return workoutEntries;
     }
 }

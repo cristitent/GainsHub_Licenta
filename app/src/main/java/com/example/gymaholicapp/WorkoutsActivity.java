@@ -49,6 +49,7 @@ public class WorkoutsActivity extends AppCompatActivity {
         svWorkouts = findViewById(R.id.sv_workouts);
         layoutWorkouts = findViewById(R.id.layoutWorkouts);
 
+        db = FirebaseFirestore.getInstance();
         workoutsCollection = db.collection("workouts");
 
         btnAddWorkout.setOnClickListener(new View.OnClickListener() {
@@ -71,20 +72,20 @@ public class WorkoutsActivity extends AppCompatActivity {
         workoutsCollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                    String workoutId = documentSnapshot.getId();
-                    String workoutName = documentSnapshot.getString("workoutName");
+                for (DocumentSnapshot workoutSnapshot : queryDocumentSnapshots) {
+                    String workoutId = workoutSnapshot.getId();
+                    String workoutName = workoutSnapshot.getString("workoutName");
+                    String firstExercise = workoutSnapshot.getString("firstExercise");
+                    String secondExercise = workoutSnapshot.getString("secondExercise");
+                    String thirdExercise = workoutSnapshot.getString("thirdExercise");
+                    String fourthExercise = workoutSnapshot.getString("fourthExercise");
+                    String fifthExercise = workoutSnapshot.getString("fifthExercise");
+
+                    Workout workout = new Workout(workoutName, firstExercise, secondExercise, thirdExercise, fourthExercise, fifthExercise);
 
                     View workoutView = LayoutInflater.from(WorkoutsActivity.this).inflate(R.layout.list_workout, null);
                     TextView workoutNameTextView = workoutView.findViewById(R.id.textWorkoutName);
                     workoutNameTextView.setText(workoutName);
-
-                    Workout workout = new Workout(workoutName,
-                            documentSnapshot.getString("firstExercise"),
-                            documentSnapshot.getString("secondExercise"),
-                            documentSnapshot.getString("thirdExercise"),
-                            documentSnapshot.getString("fourthExercise"),
-                            documentSnapshot.getString("fifthExercise"));
 
                     workoutNameTextView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -117,6 +118,7 @@ public class WorkoutsActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Log.e("WorkoutsActivity", "Error loading workouts", e);
             }
         });
     }

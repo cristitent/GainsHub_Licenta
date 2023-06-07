@@ -6,7 +6,7 @@
     app:circularflow_angles="10">
 
     <LinearLayout
-        android:id="@+id/llHistory"
+        android:id="@+id/layoutHistory"
         android:layout_width="330dp"
         android:layout_height="82dp"
         android:layout_marginStart="2dp"

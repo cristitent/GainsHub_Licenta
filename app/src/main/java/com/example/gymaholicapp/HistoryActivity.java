@@ -1,93 +1,88 @@
 package com.example.gymaholicapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HistoryActivity extends AppCompatActivity {
-
     private LinearLayout layoutHistoryList;
     private FirebaseFirestore db;
+    private LinearLayout layoutHistory;
+    private ScrollView svHistory;
+    private CollectionReference historyCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        layoutHistoryList = findViewById(R.id.llHistory);
+        layoutHistoryList = findViewById(R.id.layoutHistory);
         db = FirebaseFirestore.getInstance();
+        layoutHistory = findViewById(R.id.layoutHistory);
+        svHistory = findViewById(R.id.sv_history);
 
-        db.collection("exercises")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Map<Integer, List<String>> exerciseWorkouts = new HashMap<>();
-
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            long exerciseIndex = documentSnapshot.getLong("exerciseIndex");
-                            String workoutName = documentSnapshot.getString("workoutName");
-
-                            List<String> workoutNames = exerciseWorkouts.get((int) exerciseIndex);
-                            if (workoutNames == null) {
-                                workoutNames = new ArrayList<>();
-                                exerciseWorkouts.put((int) exerciseIndex, workoutNames);
-                            }
-
-                            workoutNames.add(workoutName);
-                        }
-
-                        displayWorkoutNames(exerciseWorkouts);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.e("Firestore", "Error fetching exercise data: " + e.getMessage());
-                    }
-                });
+        loadWorkoutHistoryFromDatabase();
     }
 
-    private void displayWorkoutNames(Map<Integer, List<String>> exerciseWorkouts) {
-        for (Map.Entry<Integer, List<String>> entry : exerciseWorkouts.entrySet()) {
-            int exerciseIndex = entry.getKey();
-            List<String> workoutNames = entry.getValue();
+    private void loadWorkoutHistoryFromDatabase() {
+        layoutHistory.removeAllViews();
 
-            TextView exerciseIndexTextView = new TextView(this);
-            exerciseIndexTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            exerciseIndexTextView.setText("Exercise Index: " + exerciseIndex);
-            exerciseIndexTextView.setTextSize(24);
-            exerciseIndexTextView.setTypeface(null, Typeface.BOLD);
-            layoutHistoryList.addView(exerciseIndexTextView);
+        historyCollection = db.collection("workouts");
+        historyCollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (DocumentSnapshot workoutSnapshot : queryDocumentSnapshots) {
+                    String workoutId = workoutSnapshot.getId();
+                    String workoutName = workoutSnapshot.getString("workoutName");
+                    List<DocumentSnapshot> exerciseDocuments = workoutSnapshot.get("exercises", List.class);
 
-            for (String workoutName : workoutNames) {
-                TextView workoutNameTextView = new TextView(this);
-                workoutNameTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                ));
-                workoutNameTextView.setText(workoutName);
-                workoutNameTextView.setTextSize(18);
-                layoutHistoryList.addView(workoutNameTextView);
+                    Workout workout = new Workout();
+                    workout.setWorkoutId(workoutId);
+                    workout.setWorkoutName(workoutName);
+
+                    if (exerciseDocuments != null) {
+                        for (DocumentSnapshot exerciseSnapshot : exerciseDocuments) {
+                            int exerciseIndex = exerciseSnapshot.getLong("exerciseIndex").intValue();
+                            String exerciseName = exerciseSnapshot.getString("exerciseName");
+                            int sets = exerciseSnapshot.getLong("sets").intValue();
+                            int reps = exerciseSnapshot.getLong("reps").intValue();
+                            double weights = exerciseSnapshot.getDouble("weights");
+
+                            workout.addExerciseEntry(exerciseIndex, exerciseName, sets, reps, weights);
+                        }
+                    }
+
+                    View workoutView = LayoutInflater.from(HistoryActivity.this).inflate(R.layout.list_history, null);
+                    TextView workoutNameTextView = workoutView.findViewById(R.id.textWorkoutNameH);
+                    workoutNameTextView.setText(workoutName);
+
+                    layoutHistory.addView(workoutView);
+                    svHistory.fullScroll(View.FOCUS_DOWN);
+                }
             }
-        }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("WorkoutsActivity", "Error loading workouts", e);
+            }
+        });
     }
 }
