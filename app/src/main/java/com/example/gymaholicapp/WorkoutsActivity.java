@@ -345,19 +345,6 @@ public class WorkoutsActivity extends AppCompatActivity {
                                     workoutInstanceData.put("workoutId", workoutId);
                                     workoutInstanceData.put("date", currentDate);
 
-                                    db.collection("workoutInstances")
-                                            .add(workoutInstanceData)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                }
-                                            });
-
                                 } else {
                                     Log.e("WorkoutsActivity", "Workout document does not exist in Firestore.");
                                 }
