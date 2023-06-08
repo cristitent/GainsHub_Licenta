@@ -336,7 +336,7 @@ public class WorkoutsActivity extends AppCompatActivity {
                                     entryCount++;
 
                                     for (int i = 0; i < exerciseNames.length; i++) {
-                                        addExerciseSubcollection(db, workout, entryCount, exerciseNames[i], setsEditTexts[i], repsEditTexts[i], weightsEditTexts[i]);
+                                        addExerciseCollection(db, workout, entryCount, exerciseNames[i], setsEditTexts[i], repsEditTexts[i], weightsEditTexts[i]);
                                     }
 
                                     Date currentDate = new Date();
@@ -364,17 +364,15 @@ public class WorkoutsActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void addExerciseSubcollection(FirebaseFirestore db, Workout workout, int exerciseIndex, String exerciseName,
-                                          EditText setsEditText, EditText repsEditText, EditText weightsEditText) {
+    private void addExerciseCollection(FirebaseFirestore db, Workout workout, int exerciseIndex, String exerciseName,
+                                       EditText setsEditText, EditText repsEditText, EditText weightsEditText) {
         int sets = Integer.parseInt(setsEditText.getText().toString());
         int reps = Integer.parseInt(repsEditText.getText().toString());
         double weights = Double.parseDouble(weightsEditText.getText().toString());
 
         ExerciseData exerciseData = new ExerciseData(exerciseIndex, exerciseName, sets, reps, weights);
 
-        CollectionReference exerciseCollection = db.collection("workouts")
-                .document(workout.getWorkoutId())
-                .collection("exercises");
+        CollectionReference exerciseCollection = db.collection("exercises");
 
         exerciseCollection.add(exerciseData)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
