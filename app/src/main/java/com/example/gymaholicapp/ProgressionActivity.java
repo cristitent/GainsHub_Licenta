@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
@@ -88,7 +86,6 @@ public class ProgressionActivity extends AppCompatActivity {
     }
 
     private void openProgressionDetailsDialog(Workout workout) {
-
         final Dialog dialog = new Dialog(ProgressionActivity.this);
         dialog.setContentView(R.layout.progression_dialog);
 
@@ -119,7 +116,6 @@ public class ProgressionActivity extends AppCompatActivity {
         String fourthExercise = "Fourth Exercise: " + workout.getFourthExercise();
         String fifthExercise = "Fifth Exercise: " + workout.getFifthExercise();
 
-
         workoutNameTextView.setText(workout.getWorkoutName());
         firstExerciseTextView.setText(firstExercise);
         secondExerciseTextView.setText(secondExercise);
@@ -127,10 +123,13 @@ public class ProgressionActivity extends AppCompatActivity {
         fourthExerciseTextView.setText(fourthExercise);
         fifthExerciseTextView.setText(fifthExercise);
 
-        String workoutId = workout.getWorkoutId();
-        if (workoutId != null) {
-            progressionExercisesCollection = db.collection("workouts").document(workoutId).collection("exercises");
-            progressionExercisesCollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        String exerciseName = workout.getFirstExercise();
+
+        if (exerciseName != null) {
+            progressionExercisesCollection = db.collection("exercises");
+            progressionExercisesCollection.whereEqualTo("name", exerciseName)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             List<DocumentSnapshot> exerciseSnapshots = queryDocumentSnapshots.getDocuments();
@@ -156,7 +155,7 @@ public class ProgressionActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            Log.e("ProgressionActivity", "Invalid workout ID");
+            Log.e("ProgressionActivity", "Invalid workout name");
         }
 
         Button btnOk = dialog.findViewById(R.id.btnOk);
