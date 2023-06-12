@@ -2,11 +2,15 @@ package com.example.gymaholicapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +22,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,7 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WorkoutsActivity extends AppCompatActivity {
+public class WorkoutsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Button btnAddWorkout;
     private FirebaseFirestore db;
     private ScrollView svWorkouts;
@@ -51,6 +57,20 @@ public class WorkoutsActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         workoutsCollection = db.collection("workouts");
+
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(this);
 
         btnAddWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -386,4 +406,31 @@ public class WorkoutsActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.menuHome) {
+            startActivity(new Intent(WorkoutsActivity.this, MainActivity.class));
+        } else if (itemId == R.id.menuExercises) {
+            startActivity(new Intent(WorkoutsActivity.this, ExercisesActivity.class));
+        } else if (itemId == R.id.menuWorkouts) {
+            startActivity(new Intent(WorkoutsActivity.this, WorkoutsActivity.class));
+        } else if (itemId == R.id.menuProgression) {
+            startActivity(new Intent(WorkoutsActivity.this, ProgressionActivity.class));
+        } else if (itemId == R.id.menuHistory) {
+            startActivity(new Intent(WorkoutsActivity.this, HistoryActivity.class));
+        } else if (itemId == R.id.menuLogOut) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 }

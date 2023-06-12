@@ -1,16 +1,23 @@
 package com.example.gymaholicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Button buttonExercises;
     private Button buttonWorkouts;
     private Button buttonProgression;
@@ -23,6 +30,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(this);
 
         auth = FirebaseAuth.getInstance();
         buttonLogout = findViewById(R.id.buttonLogout);
@@ -75,6 +95,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.menuHome) {
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
+        } else if (itemId == R.id.menuExercises) {
+            startActivity(new Intent(MainActivity.this, ExercisesActivity.class));
+        } else if (itemId == R.id.menuWorkouts) {
+            startActivity(new Intent(MainActivity.this, WorkoutsActivity.class));
+        } else if (itemId == R.id.menuProgression) {
+            startActivity(new Intent(MainActivity.this, ProgressionActivity.class));
+        } else if (itemId == R.id.menuHistory) {
+            startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+        } else if (itemId == R.id.menuLogOut) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     public void openExercisesActivity() {
         Intent intent = new Intent(this, ExercisesActivity.class);
         startActivity(intent);
