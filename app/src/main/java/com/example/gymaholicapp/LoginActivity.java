@@ -23,7 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword;
     Button buttonSignIn;
     FirebaseAuth mAuth;
-    TextView textView;
+    TextView textViewSignUp;
+    TextView textViewForgotPass;
 
     @Override
     public void onStart() {
@@ -44,11 +45,22 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.id_et_username);
         editTextPassword = findViewById(R.id.id_et_password);
         buttonSignIn = findViewById(R.id.buttonSignIn);
-        textView = findViewById(R.id.SignUpNow);
-        textView.setOnClickListener(new View.OnClickListener() {
+        textViewSignUp = findViewById(R.id.SignUpNow);
+        textViewForgotPass = findViewById(R.id.id_forpas);
+
+        textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        textViewForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
                 startActivity(intent);
                 finish();
             }

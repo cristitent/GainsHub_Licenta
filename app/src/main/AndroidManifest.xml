@@ -15,6 +15,9 @@
         android:theme="@style/Theme.GymaholicApp"
         tools:targetApi="31">
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProgressionActivity"
             android:exported="false" />
         <activity
