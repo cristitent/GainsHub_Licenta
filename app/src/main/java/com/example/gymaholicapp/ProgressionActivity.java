@@ -81,7 +81,6 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
 
                     Workout workout = new Workout(workoutName, firstExercise, secondExercise, thirdExercise, fourthExercise, fifthExercise);
 
-                    // Retrieve exercise data from "exercises" collection
                     CollectionReference exerciseCollection = db.collection("exercises");
                     exerciseCollection.whereEqualTo("workoutName", workoutName).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -169,10 +168,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getFirstExercise()) && data.getExerciseIndex() == 1) {
                     String firstExerciseWeight = "Starting Weight: " + data.getWeights();
                     firstExerciseStartingWeightsTextView.setText(firstExerciseWeight);
-                    firstExerciseStartingWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    firstExerciseStartingWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    firstExerciseStartingWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    firstExerciseStartingWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -182,10 +181,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getFirstExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
                     String firstExerciseWeight = "Starting Weight: " + data.getWeights();
                     firstExerciseCurrentWeightsTextView.setText(firstExerciseWeight);
-                    firstExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    firstExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    firstExerciseCurrentWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    firstExerciseCurrentWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -195,10 +194,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getSecondExercise()) && data.getExerciseIndex() == 1) {
                     String secondExerciseWeight = "Starting Weight: " + data.getWeights();
                     secondExerciseStartingWeightsTextView.setText(secondExerciseWeight);
-                    secondExerciseStartingWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    secondExerciseStartingWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    secondExerciseStartingWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    secondExerciseStartingWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -208,10 +207,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getSecondExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
                     String secondExerciseWeight = "Starting Weight: " + data.getWeights();
                     secondExerciseCurrentWeightsTextView.setText(secondExerciseWeight);
-                    secondExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    secondExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    secondExerciseCurrentWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    secondExerciseCurrentWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -222,10 +221,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getThirdExercise()) && data.getExerciseIndex() == 1) {
                     String thirdExerciseWeight = "Starting Weight: " + data.getWeights();
                     thirdExerciseStartingWeightsTextView.setText(thirdExerciseWeight);
-                    thirdExerciseStartingWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    thirdExerciseStartingWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    thirdExerciseStartingWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    thirdExerciseStartingWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -235,10 +234,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getThirdExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
                     String thirdExerciseWeight = "Starting Weight: " + data.getWeights();
                     thirdExerciseCurrentWeightsTextView.setText(thirdExerciseWeight);
-                    thirdExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    thirdExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    thirdExerciseCurrentWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    thirdExerciseCurrentWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -248,10 +247,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getFourthExercise()) && data.getExerciseIndex() == 1) {
                     String fourthExerciseWeight = "Starting Weight: " + data.getWeights();
                     fourthExerciseStartingWeightsTextView.setText(fourthExerciseWeight);
-                    fourthExerciseStartingWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    fourthExerciseStartingWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    fourthExerciseStartingWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    fourthExerciseStartingWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -261,10 +260,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getFourthExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
                     String fourthExerciseWeight = "Starting Weight: " + data.getWeights();
                     fourthExerciseCurrentWeightsTextView.setText(fourthExerciseWeight);
-                    fourthExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    fourthExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    fourthExerciseCurrentWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    fourthExerciseCurrentWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -274,10 +273,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getFifthExercise()) && data.getExerciseIndex() == 1) {
                     String fifthExerciseWeight = "Starting Weight: " + data.getWeights();
                     fifthExerciseStartingWeightsTextView.setText(fifthExerciseWeight);
-                    fifthExerciseStartingWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    fifthExerciseStartingWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    fifthExerciseStartingWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    fifthExerciseStartingWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
@@ -287,10 +286,10 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
                 if (data.getExerciseName().equals(workout.getFifthExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
                     String fifthExerciseWeight = "Starting Weight: " + data.getWeights();
                     fifthExerciseCurrentWeightsTextView.setText(fifthExerciseWeight);
-                    fifthExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE); // Make the text view visible
-                    break; // Exit the loop since we found the matching exercise
+                    fifthExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
+                    break;
                 } else {
-                    fifthExerciseCurrentWeightsTextView.setVisibility(View.GONE); // Hide the text view
+                    fifthExerciseCurrentWeightsTextView.setVisibility(View.GONE);
                 }
             }
         }
