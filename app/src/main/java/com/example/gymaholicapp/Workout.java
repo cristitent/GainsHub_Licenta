@@ -17,11 +17,11 @@ public class Workout {
     private String fourthExercise;
     private String fifthExercise;
 
-    private List<WorkoutsHistory> workoutEntries;
+    private List<ExerciseData> exerciseDataList = new ArrayList<>();
 
 
     public Workout() {
-        workoutEntries = new ArrayList<>();
+
     }
 
     public Workout(String workoutName, String firstExercise, String secondExercise, String thirdExercise, String fourthExercise, String fifthExercise) {
@@ -31,21 +31,6 @@ public class Workout {
         this.thirdExercise = thirdExercise;
         this.fourthExercise = fourthExercise;
         this.fifthExercise = fifthExercise;
-    }
-
-    public void addExercise(int exerciseIndex,String exerciseName, int sets, int reps, double weights) {
-        ExerciseData exerciseData = new ExerciseData(exerciseIndex,exerciseName, sets, reps, weights, workoutName);
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        String exerciseId = db.collection("workouts").document().getId();
-
-        DocumentReference exerciseRef = db.collection("workouts").document(getWorkoutId())
-                .collection("exercises").document(exerciseId);
-
-        exerciseRef.set(exerciseData, SetOptions.merge());
-
-        db.collection("workouts").document(getWorkoutId()).update("exerciseCount", FieldValue.increment(1));
     }
 
     public String getWorkoutId() {
@@ -104,19 +89,15 @@ public class Workout {
         this.fifthExercise = fifthExercise;
     }
 
-    public void addExerciseEntry(int exerciseIndex, String exerciseName, int sets, int reps, double weights) {
-        WorkoutsHistory entry = new WorkoutsHistory();
-        entry.setWorkoutName(workoutName);
-        entry.setExerciseIndex(exerciseIndex);
-        entry.setExerciseName(exerciseName);
-        entry.setSets(sets);
-        entry.setReps(reps);
-        entry.setWeights(weights);
-
-        workoutEntries.add(entry);
+    public List<ExerciseData> getExerciseDataList() {
+        return exerciseDataList;
     }
 
-    public List<WorkoutsHistory> getWorkoutEntries() {
-        return workoutEntries;
+    public void setExerciseDataList(List<ExerciseData> exerciseDataList) {
+        this.exerciseDataList = exerciseDataList;
+    }
+
+    public void addExerciseData(ExerciseData exerciseData) {
+        exerciseDataList.add(exerciseData);
     }
 }

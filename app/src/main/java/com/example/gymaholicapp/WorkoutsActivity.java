@@ -6,7 +6,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,6 +45,7 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
     private ScrollView svWorkouts;
     private LinearLayout layoutWorkouts;
     private CollectionReference workoutsCollection;
+    private SharedPreferences exerciseEntryPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,9 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
 
         workoutsCollection = db.collection("workouts");
 
-
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+
+        exerciseEntryPrefs = getSharedPreferences("ExerciseEntryPrefs", Context.MODE_PRIVATE);
 
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,7 +282,7 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
         dialog.show();
     }
 
-    private int entryCount = 0;
+    private Map<String, Integer> exerciseEntryCounts = new HashMap<>();
     private void openWorkoutInstanceDialog(Workout workout) {
         final Dialog dialog = new Dialog(WorkoutsActivity.this);
         dialog.setContentView(R.layout.workout_instance_dialog);
@@ -352,10 +356,11 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
                                             dialog.findViewById(R.id.dialog_weights_value5)
                                     };
 
-                                    entryCount++;
-
                                     for (int i = 0; i < exerciseNames.length; i++) {
-                                        addExerciseCollection(db, workout, entryCount, exerciseNames[i], setsEditTexts[i], repsEditTexts[i], weightsEditTexts[i], workout.getWorkoutName());
+                                        String exerciseName = exerciseNames[i];
+                                        int exerciseEntryCount = getExerciseEntryCount(exerciseName) + 1;
+                                        addExerciseCollection(db, workout, exerciseEntryCount, exerciseName, setsEditTexts[i], repsEditTexts[i], weightsEditTexts[i], workout.getWorkoutName());
+                                        incrementExerciseEntryCount(exerciseName);
                                     }
 
                                     Date currentDate = new Date();
@@ -431,5 +436,16 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private int getExerciseEntryCount(String exerciseName) {
+        return exerciseEntryPrefs.getInt(exerciseName, 0);
+    }
+
+
+    private void incrementExerciseEntryCount(String exerciseName) {
+        int count = getExerciseEntryCount(exerciseName) + 1;
+        exerciseEntryPrefs.edit().putInt(exerciseName, count).apply();
+    }
+
 
 }

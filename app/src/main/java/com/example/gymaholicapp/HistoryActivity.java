@@ -86,7 +86,6 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
                             int reps = exerciseSnapshot.getLong("reps").intValue();
                             double weights = exerciseSnapshot.getDouble("weights");
 
-                            workout.addExerciseEntry(exerciseIndex, exerciseName, sets, reps, weights);
                         }
                     }
 
