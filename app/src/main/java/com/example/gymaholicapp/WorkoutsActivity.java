@@ -55,7 +55,6 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
         svWorkouts = findViewById(R.id.sv_workouts);
         layoutWorkouts = findViewById(R.id.layoutWorkouts);
 
-        db = FirebaseFirestore.getInstance();
         workoutsCollection = db.collection("workouts");
 
 
@@ -356,7 +355,7 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
                                     entryCount++;
 
                                     for (int i = 0; i < exerciseNames.length; i++) {
-                                        addExerciseCollection(db, workout, entryCount, exerciseNames[i], setsEditTexts[i], repsEditTexts[i], weightsEditTexts[i]);
+                                        addExerciseCollection(db, workout, entryCount, exerciseNames[i], setsEditTexts[i], repsEditTexts[i], weightsEditTexts[i], workout.getWorkoutName());
                                     }
 
                                     Date currentDate = new Date();
@@ -385,12 +384,12 @@ public class WorkoutsActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void addExerciseCollection(FirebaseFirestore db, Workout workout, int exerciseIndex, String exerciseName,
-                                       EditText setsEditText, EditText repsEditText, EditText weightsEditText) {
+                                       EditText setsEditText, EditText repsEditText, EditText weightsEditText, String workoutName) {
         int sets = Integer.parseInt(setsEditText.getText().toString());
         int reps = Integer.parseInt(repsEditText.getText().toString());
         double weights = Double.parseDouble(weightsEditText.getText().toString());
 
-        ExerciseData exerciseData = new ExerciseData(exerciseIndex, exerciseName, sets, reps, weights);
+        ExerciseData exerciseData = new ExerciseData(exerciseIndex, exerciseName, sets, reps, weights, workoutName);
 
         CollectionReference exerciseCollection = db.collection("exercises");
 

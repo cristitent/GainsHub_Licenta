@@ -34,7 +34,7 @@ public class Workout {
     }
 
     public void addExercise(int exerciseIndex,String exerciseName, int sets, int reps, double weights) {
-        ExerciseData exerciseData = new ExerciseData(exerciseIndex,exerciseName, sets, reps, weights);
+        ExerciseData exerciseData = new ExerciseData(exerciseIndex,exerciseName, sets, reps, weights, workoutName);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

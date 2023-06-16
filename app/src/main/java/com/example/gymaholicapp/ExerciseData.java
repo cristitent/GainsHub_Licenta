@@ -6,16 +6,18 @@ public class ExerciseData {
     private int sets;
     private int reps;
     private double weights;
+    private String workoutName;
 
     public ExerciseData() {
     }
 
-    public ExerciseData(int exerciseIndex, String exerciseName, int sets, int reps, double weights) {
+    public ExerciseData(int exerciseIndex, String exerciseName, int sets, int reps, double weights, String workoutName) {
         this.exerciseIndex = exerciseIndex;
         this.exerciseName = exerciseName;
         this.sets = sets;
         this.reps = reps;
         this.weights = weights;
+        this.workoutName = workoutName;
     }
 
     public int getExerciseIndex() {
@@ -56,5 +58,13 @@ public class ExerciseData {
 
     public void setWeights(double weights) {
         this.weights = weights;
+    }
+
+    public String getWorkoutName() {
+        return workoutName;
+    }
+
+    public void setWorkoutName(String workoutName) {
+        this.workoutName = workoutName;
     }
 }
