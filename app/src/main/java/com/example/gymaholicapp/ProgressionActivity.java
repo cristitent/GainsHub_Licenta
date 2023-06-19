@@ -179,7 +179,7 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
         if(exerciseDataList != null) {
             for (ExerciseData data : exerciseDataList) {
                 if (data.getExerciseName().equals(workout.getFirstExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
-                    String firstExerciseWeight = "Starting Weight: " + data.getWeights();
+                    String firstExerciseWeight = "Current Weight: " + data.getWeights();
                     firstExerciseCurrentWeightsTextView.setText(firstExerciseWeight);
                     firstExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
                     break;
@@ -205,7 +205,7 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
         if(exerciseDataList != null) {
             for (ExerciseData data : exerciseDataList) {
                 if (data.getExerciseName().equals(workout.getSecondExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
-                    String secondExerciseWeight = "Starting Weight: " + data.getWeights();
+                    String secondExerciseWeight = "Current Weight: " + data.getWeights();
                     secondExerciseCurrentWeightsTextView.setText(secondExerciseWeight);
                     secondExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
                     break;
@@ -232,7 +232,7 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
         if(exerciseDataList != null) {
             for (ExerciseData data : exerciseDataList) {
                 if (data.getExerciseName().equals(workout.getThirdExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
-                    String thirdExerciseWeight = "Starting Weight: " + data.getWeights();
+                    String thirdExerciseWeight = "Current Weight: " + data.getWeights();
                     thirdExerciseCurrentWeightsTextView.setText(thirdExerciseWeight);
                     thirdExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
                     break;
@@ -258,7 +258,7 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
         if(exerciseDataList != null) {
             for (ExerciseData data : exerciseDataList) {
                 if (data.getExerciseName().equals(workout.getFourthExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
-                    String fourthExerciseWeight = "Starting Weight: " + data.getWeights();
+                    String fourthExerciseWeight = "Current Weight: " + data.getWeights();
                     fourthExerciseCurrentWeightsTextView.setText(fourthExerciseWeight);
                     fourthExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
                     break;
@@ -284,7 +284,7 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
         if(exerciseDataList != null) {
             for (ExerciseData data : exerciseDataList) {
                 if (data.getExerciseName().equals(workout.getFifthExercise()) && data.getExerciseIndex() == maxExerciseIndex) {
-                    String fifthExerciseWeight = "Starting Weight: " + data.getWeights();
+                    String fifthExerciseWeight = "Current Weight: " + data.getWeights();
                     fifthExerciseCurrentWeightsTextView.setText(fifthExerciseWeight);
                     fifthExerciseCurrentWeightsTextView.setVisibility(View.VISIBLE);
                     break;
