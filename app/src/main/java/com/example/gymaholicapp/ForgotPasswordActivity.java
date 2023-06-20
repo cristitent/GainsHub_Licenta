@@ -13,11 +13,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     Button btnReset;
+    FloatingActionButton btnBack;
     EditText editTextEmail;
     FirebaseAuth mAuth;
     String strEmail;
@@ -29,9 +31,17 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         btnReset = findViewById(R.id.buttonReset);
+        btnBack = findViewById(R.id.id_fab_back);
         editTextEmail = findViewById(R.id.id_forgot_email);
 
         mAuth = FirebaseAuth.getInstance();
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLoginActivity();
+            }
+        });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,5 +77,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 });
 
+    }
+
+    public void openLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }
