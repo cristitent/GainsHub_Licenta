@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -72,37 +74,90 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
                 for (DocumentSnapshot workoutSnapshot : queryDocumentSnapshots) {
                     String workoutId = workoutSnapshot.getId();
                     String workoutName = workoutSnapshot.getString("workoutName");
-                    List<DocumentSnapshot> exerciseDocuments = workoutSnapshot.get("exercises", List.class);
+                    String firstExercise = workoutSnapshot.getString("firstExercise");
+                    String secondExercise = workoutSnapshot.getString("secondExercise");
+                    String thirdExercise = workoutSnapshot.getString("thirdExercise");
+                    String fourthExercise = workoutSnapshot.getString("fourthExercise");
+                    String fifthExercise = workoutSnapshot.getString("fifthExercise");
 
-                    Workout workout = new Workout();
-                    workout.setWorkoutId(workoutId);
-                    workout.setWorkoutName(workoutName);
+                    Workout workout = new Workout(workoutName, firstExercise, secondExercise, thirdExercise, fourthExercise, fifthExercise);
 
-                    if (exerciseDocuments != null) {
-                        for (DocumentSnapshot exerciseSnapshot : exerciseDocuments) {
-                            int exerciseIndex = exerciseSnapshot.getLong("exerciseIndex").intValue();
-                            String exerciseName = exerciseSnapshot.getString("exerciseName");
-                            int sets = exerciseSnapshot.getLong("sets").intValue();
-                            int reps = exerciseSnapshot.getLong("reps").intValue();
-                            double weights = exerciseSnapshot.getDouble("weights");
+                    CollectionReference exerciseCollection = db.collection("exercises");
+                    exerciseCollection.whereEqualTo("workoutName", workoutName).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot exerciseSnapshot) {
+                            for (DocumentSnapshot exerciseDocument : exerciseSnapshot) {
+                                String exerciseName = exerciseDocument.getString("exerciseName");
+                                int exerciseIndex = exerciseDocument.getLong("exerciseIndex").intValue();
+                                int sets = exerciseDocument.getLong("sets").intValue();
+                                int reps = exerciseDocument.getLong("reps").intValue();
+                                double weights = exerciseDocument.getDouble("weights");
 
+                                ExerciseData exerciseData = new ExerciseData(exerciseIndex, exerciseName, sets, reps, weights, workoutName);
+                                workout.addExerciseData(exerciseData);
+                            }
+
+                            View workoutView = LayoutInflater.from(HistoryActivity.this).inflate(R.layout.list_history, null);
+                            TextView workoutNameTextView = workoutView.findViewById(R.id.textWorkoutNameH);
+                            workoutNameTextView.setText(workoutName);
+
+                            workoutNameTextView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    openHistoryDetailsDialog(workout);
+                                }
+                            });
+
+                            layoutHistory.addView(workoutView);
+                            svHistory.fullScroll(View.FOCUS_DOWN);
                         }
-                    }
-
-                    View workoutView = LayoutInflater.from(HistoryActivity.this).inflate(R.layout.list_history, null);
-                    TextView workoutNameTextView = workoutView.findViewById(R.id.textWorkoutNameH);
-                    workoutNameTextView.setText(workoutName);
-
-                    layoutHistory.addView(workoutView);
-                    svHistory.fullScroll(View.FOCUS_DOWN);
+                    });
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("WorkoutsActivity", "Error loading workouts", e);
+                Log.e("History Activity", "Error loading workouts", e);
             }
         });
+    }
+
+    private void openHistoryDetailsDialog(Workout workout) {
+        final Dialog dialog = new Dialog(HistoryActivity.this);
+        dialog.setContentView(R.layout.history_dialog);
+
+        TextView workoutNameTextView = dialog.findViewById(R.id.dialog_workout_name);
+
+        TextView historyDialogTextView = dialog.findViewById(R.id.dialog_history_text);
+
+        workoutNameTextView.setText(workout.getWorkoutName());
+
+        List<ExerciseData> exerciseDataList = workout.getExerciseDataList();
+
+        int maxExerciseIndex = getMaxExerciseIndex(exerciseDataList);
+
+        if(exerciseDataList != null) {
+            for (ExerciseData data : exerciseDataList) {
+                if (data.getExerciseIndex() == maxExerciseIndex) {
+                    String historyDialog = "Congratulations!!! You did this workout " + data.getExerciseIndex() + " times.";
+                    historyDialogTextView.setText(historyDialog);
+                    break;
+                } else {
+                    String historyDialog = "Congratulations!!! You did this workout 0 times.";
+                    historyDialogTextView.setText(historyDialog);
+                }
+            }
+        }
+
+        Button btnOk = dialog.findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
 
@@ -129,6 +184,19 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private int getMaxExerciseIndex(List<ExerciseData> exerciseDataList) {
+        int maxIndex = 0;
+        if (exerciseDataList != null) {
+            for (ExerciseData data : exerciseDataList) {
+                int exerciseIndex = data.getExerciseIndex();
+                if (exerciseIndex > maxIndex) {
+                    maxIndex = exerciseIndex;
+                }
+            }
+        }
+        return maxIndex;
     }
 
 }

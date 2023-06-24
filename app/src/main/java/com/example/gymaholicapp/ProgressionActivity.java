@@ -66,7 +66,6 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
         layoutProgression.removeAllViews();
 
         progressionCollection = db.collection("workouts");
-
         progressionCollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -116,7 +115,7 @@ public class ProgressionActivity extends AppCompatActivity implements Navigation
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("WorkoutsActivity", "Error loading workouts", e);
+                Log.e("Progression Activity", "Error loading workouts", e);
             }
         });
     }
