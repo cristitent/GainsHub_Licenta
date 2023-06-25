@@ -163,7 +163,6 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorBlack"
             android:layout_below="@id/dialog_weights_label4"
-            android:layout_marginStart="25dp"
             android:layout_marginBottom="16dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"/>
